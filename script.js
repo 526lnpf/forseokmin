@@ -2,49 +2,10 @@ let timer;
 let currentShot = 0;
 const totalShots = 4;
 
-document.getElementById('capture').addEventListener('click', startCapture);
-
-function startCapture() {
-  currentShot = 0;
-  takePhoto();
-}
-
-function takePhoto() {
-  if (currentShot < totalShots) {
-    document.getElementById('timer').innerHTML = 3;
-    timer = setInterval(() => {
-      let timeLeft = parseInt(document.getElementById('timer').innerHTML);
-      if (timeLeft > 1) {
-        document.getElementById('timer').innerHTML = timeLeft - 1;
-      } else {
-        clearInterval(timer);
-        captureImage();
-        current
-function captureImage() {
-  // Get member selection
-  const member = document.getElementById('memberSelect').value;
-
-  // Set overlay image based on selected member
-  const overlayPath = member === "Joshua" ? "images/joshua-overlay.png" : "images/yushi-overlay.png";
-  document.getElementById('overlayImage').src = overlayPath;
-  document.getElementById('overlayImage').style.display = "block";
-  
-  // Logic to capture the image from the video and apply the overlay
-  // This is where you would use canvas to capture the video frame and apply the overlay
-}
-  
-  // Logic to capture the image from the video and apply the overlay
-  // This is where you would use canvas to capture the video frame and apply the overlay
-  // Example:
-  // const canvas = document.createElement('canvas');
-  // const context = canvas.getContext('2d');
-  // context.drawImage(videoElement, 0, 0);
-  // context.drawImage(overlayImageElement, 0, 0);
-  // Save or display the final image
-}
-let timer;
-let currentShot = 0;
-const totalShots = 4;
+// Start the camera when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  startCamera();
+});
 
 // Access the camera
 async function startCamera() {
@@ -57,42 +18,87 @@ async function startCamera() {
   }
 }
 
+// Update members when a group is selected
+document.getElementById('groupSelect').addEventListener('change', updateMembers);
+
+function updateMembers() {
+  const group = document.getElementById('groupSelect').value;
+  const memberSelect = document.getElementById('memberSelect');
+  
+  // Clear existing options
+  memberSelect.innerHTML = '';
+
+  // Add members based on selected group
+  if (group === 'Seventeen') {
+    const members = ['S. Coups', 'Jeonghan', 'Joshua', 'Jun', 'Hoshi', 'Wonwoo', 'Woozi', 'DK', 'Mingyu', 'The8', 'Seungkwan', 'Vernon', 'Dino'];
+    members.forEach(member => {
+      memberSelect.innerHTML += `<option value="${member}">${member}</option>`;
+    });
+  } else if (group === 'NCT WISH') {
+    const members = ['Sion', 'Riku', 'Yushi', 'Jaehee', 'Ryo', 'Sakuya'];
+    members.forEach(member => {
+      memberSelect.innerHTML += `<option value="${member}">${member}</option>`;
+    });
+  }
+
+  // Show the members dropdown if options exist
+  memberSelect.style.display = memberSelect.innerHTML ? 'block' : 'none';
+}
+
+// Capture button event listener
 document.getElementById('capture').addEventListener('click', startCapture);
 
 function startCapture() {
   currentShot = 0;
+  // Clear any previously captured photos
+  document.getElementById('photos').innerHTML = '';
   takePhoto();
 }
 
 function takePhoto() {
   if (currentShot < totalShots) {
-    document.getElementById('timer').innerHTML = 3;
+    let countdown = 3;
+    const timerDisplay = document.getElementById('timer');
+    timerDisplay.innerHTML = countdown;
+    
     timer = setInterval(() => {
-      let timeLeft = parseInt(document.getElementById('timer').innerHTML);
-      if (timeLeft > 1) {
-        document.getElementById('timer').innerHTML = timeLeft - 1;
-      } else {
+      countdown--;
+      if (countdown <= 0) {
         clearInterval(timer);
-        captureImage();
+        timerDisplay.innerHTML = 'Smile!';
+        captureFrame();
         currentShot++;
-        takePhoto(); // Move to the next shot
+        // Brief pause before starting next countdown
+        setTimeout(takePhoto, 500);
+      } else {
+        timerDisplay.innerHTML = countdown;
       }
     }, 1000);
+  } else {
+    // All shots taken; clear the timer display.
+    document.getElementById('timer').innerHTML = '';
   }
 }
 
-function captureImage() {
-  // Get member selection
-  const member = document.getElementById('memberSelect').value;
+function captureFrame() {
+  const video = document.getElementById('camera');
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  const ctx = canvas.getContext('2d');
+  
+  // Draw the current frame from the video onto the canvas.
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-  // Set overlay image based on selected member
-  const overlayPath = member === "Joshua" ? "images/joshua-overlay.png" : "images/yushi-overlay.png";
-  document.getElementById('overlayImage').src = overlayPath;
-  document.getElementById('overlayImage').style.display = "block";
+  // Optionally, you can also draw an overlay image here if needed.
+  // For example:
+  // const overlayImage = document.getElementById('overlayImage');
+  // if (overlayImage.src && overlayImage.style.display !== 'none') {
+  //   ctx.drawImage(overlayImage, 0, 0, canvas.width, canvas.height);
+  // }
 
-  // Logic to capture the image from the video and apply the overlay
-  // Example to capture image will be implemented here
+  // Append the captured photo to the photos container.
+  const photosContainer = document.getElementById('photos');
+  canvas.className = 'captured-photo';
+  photosContainer.appendChild(canvas);
 }
-
-// Start the camera when the page loads
-startCamera();
