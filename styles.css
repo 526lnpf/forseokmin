@@ -4,6 +4,7 @@ body {
   padding: 25px;
   text-align: center; /* Center-align text */
 }
+
 .container {
   max-width: 600px; /* Set a max width for the container */
   margin: 0 auto; /* Center the container */
@@ -12,14 +13,17 @@ body {
   background-color: white; /* White background for content */
   padding: 20px; /* Padding inside container */
 }
+
 .title {
   color: #00796b; /* Darker shade for title */
   font-size: 36px; /* Larger title */
   margin-bottom: 20px; /* Space below title */
 }
+
 .camera-container {
   position: relative;
 }
+
 #camera {
   width: 100%;
   height: auto;
@@ -28,6 +32,11 @@ body {
 }
 
 #options {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  gap: 10px; /* Space between elements */
   margin-top: 20px;
 }
 
@@ -64,21 +73,33 @@ button:hover {
   width: 100%; /* Adjust as needed */
   height: auto; /* Maintain aspect ratio */
 }
-/* Existing styles remain unchanged */
 
-#memberSelect {
-  background-color: #ffffff; /* White background for dropdown */
-  color: #00796b; /* Darker text color */
-  font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font style */
-  font-size: 18px; /* Font size */
-  border: 2px solid #4db6e4; /* Light blue border */
-  border-radius: 10px; /* Rounded corners */
-  padding: 10px; /* Padding inside dropdown */
-  margin-left: 10px; /* Space to the left of the dropdown */
-  cursor: pointer; /* Pointer cursor */
+/* Dropdown styles */
+#groupSelect, #memberSelect {
+  background-color: #ffffff; /* White background */
+  color: #00796b; /* Darker text */
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 18px;
+  border: 2px solid #4db6e4;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#groupSelect {
+  margin-right: 10px;
 }
 
 #memberSelect option {
   background-color: #e0f7fa; /* Light blue background for options */
   color: #00796b; /* Darker text color for options */
+}
+
+/* Styles for captured photos */
+.captured-photo {
+  margin-top: 10px;
+  max-width: 100%;
+  border: 2px solid #4db6e4;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
