@@ -15,10 +15,19 @@
       </div>
       <div id="options">
         <button id="capture">Capture</button>
-        <select id="memberSelect">
-          <option value="Joshua">Joshua</option>
-          <option value="Yushi">Yushi</option>
+        
+        <!-- New Groups Dropdown -->
+        <select id="groupSelect">
+          <option value="" disabled selected>Select a group</option>
+          <option value="Seventeen">Seventeen</option>
+          <option value="NCT WISH">NCT WISH</option>
         </select>
+
+        <!-- Updated Members Dropdown -->
+        <select id="memberSelect" style="display:none;">
+          <!-- Options will be added dynamically -->
+        </select>
+
         <div id="timer">3</div>
       </div>
       <div id="photos"></div>
