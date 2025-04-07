@@ -1,37 +1,21 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Photobooth</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For Seokmin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <div class="container">
-      <h1 class="title">Photobooth</h1>
-      <div class="camera-container">
-        <video id="camera" autoplay></video>
-        <div id="overlayContainer">
-          <img id="overlayImage" src="" alt="Overlay" style="display:none;" />
+        <h1>Hello, Seokmin.</h1>
+        <button onclick="runMe()">(RunMe)</button>
+        <div id="messageBox"></div>
+        <div id="inputSection" style="display:none;">
+            <p>What is the one thing you have never lied about?</p>
+            <input type="text" id="confessionInput" placeholder="Type here...">
+            <button onclick="submitConfession()">Submit</button>
         </div>
-      </div>
-      <div id="options">
-        <button id="capture">Capture</button>
-        
-        <!-- New Groups Dropdown -->
-        <select id="groupSelect">
-          <option value="" disabled selected>Select a group</option>
-          <option value="Seventeen">Seventeen</option>
-          <option value="NCT WISH">NCT WISH</option>
-        </select>
-
-        <!-- Updated Members Dropdown -->
-        <select id="memberSelect" style="display:none;">
-          <!-- Options will be added dynamically -->
-        </select>
-
-        <div id="timer">3</div>
-      </div>
-      <div id="photos"></div>
     </div>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
