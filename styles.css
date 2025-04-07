@@ -1,105 +1,56 @@
-body {
-  background-color: #e0f7fa; /* Light blue background */
-  font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font style */
-  padding: 25px;
-  text-align: center; /* Center-align text */
+function runMe() {
+    const messages = [
+        "You’re annoying.",
+        "You talk too much.",
+        "You’re dramatic.",
+        "But you’re also stupidly bright.",
+        "And warm.",
+        "And you make everything fun.",
+        "And I think, even if I wanted to,",
+        "I wouldn’t be able to stop looking at you.",
+        "So, if you’re done fixing this,",
+        "maybe we can fix the other thing too."
+    ];
+
+    let index = 0;
+    const box = document.getElementById("messageBox");
+    const runButton = document.querySelector("button");
+
+    // Clear the box and disable button to prevent multiple triggers
+    box.innerHTML = "";
+    runButton.disabled = true;
+
+    const interval = setInterval(() => {
+        if (index < messages.length) {
+            const line = document.createElement("p");
+            line.textContent = messages[index];
+            box.appendChild(line);
+            index++;
+        } else {
+            clearInterval(interval);
+            document.getElementById("inputSection").style.display = "block";
+        }
+    }, 1500);
 }
 
-.container {
-  max-width: 600px; /* Set a max width for the container */
-  margin: 0 auto; /* Center the container */
-  border-radius: 15px; /* Rounded corners */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
-  background-color: white; /* White background for content */
-  padding: 20px; /* Padding inside container */
-}
+function submitConfession() {
+    const input = document.getElementById("confessionInput").value.trim().toLowerCase();
+    const box = document.getElementById("messageBox");
 
-.title {
-  color: #00796b; /* Darker shade for title */
-  font-size: 36px; /* Larger title */
-  margin-bottom: 20px; /* Space below title */
-}
+    if (input === "i like you" || input === "i love you") {
+        // Append “Good.” to the page
+        const goodLine = document.createElement("p");
+        goodLine.innerHTML = "<strong>Good.</strong>";
+        box.appendChild(goodLine);
+    
 
-.camera-container {
-  position: relative;
-}
-
-#camera {
-  width: 100%;
-  height: auto;
-  border-radius: 15px; /* Rounded corners */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
-}
-
-#options {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically */
-  gap: 10px; /* Space between elements */
-  margin-top: 20px;
-}
-
-button {
-  background-color: #4db6e4; /* Light blue button */
-  color: white; /* White text */
-  border: none;
-  border-radius: 10px; /* Rounded corners */
-  padding: 10px 20px; /* Padding inside button */
-  font-size: 18px; /* Button text size */
-  cursor: pointer; /* Pointer cursor */
-  transition: background-color 0.3s; /* Smooth transition */
-}
-
-button:hover {
-  background-color: #26a69a; /* Darker shade on hover */
-}
-
-#timer {
-  font-size: 36px; /* Larger timer text */
-  color: #ff5252; /* Red color for timer */
-  margin: 20px 0; /* Space around timer */
-}
-
-#overlayContainer {
-  position: relative;
-  display: inline-block;
-}
-
-#overlayImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; /* Adjust as needed */
-  height: auto; /* Maintain aspect ratio */
-}
-
-/* Dropdown styles */
-#groupSelect, #memberSelect {
-  background-color: #ffffff; /* White background */
-  color: #00796b; /* Darker text */
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-size: 18px;
-  border: 2px solid #4db6e4;
-  border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-#groupSelect {
-  margin-right: 10px;
-}
-
-#memberSelect option {
-  background-color: #e0f7fa; /* Light blue background for options */
-  color: #00796b; /* Darker text color for options */
-}
-
-/* Styles for captured photos */
-.captured-photo {
-  margin-top: 10px;
-  max-width: 100%;
-  border: 2px solid #4db6e4;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        // After 1 second, trigger the ringing alert
+        setTimeout(() => {
+            alert("Your phone is ringing...");
+        }, 1000); // 2000ms = 2 seconds
+    } else {
+        const tryLine = document.createElement("p");
+        tryLine.textContent = "Try again.";
+        box.appendChild(tryLine);
+    }
 }
