@@ -53,4 +53,4 @@ function submitConfession() {
         tryLine.textContent = "Try again.";
         box.appendChild(tryLine);
     }
-}
+} 
